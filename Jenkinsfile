@@ -2,27 +2,19 @@
 
 node('s390x_cocoa') {
   try {
-
-    stage 'Build'
     node('s390x_cocoa') {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        echo "Running ${env.BUILD_ID} from ${env.JENKINS_URL}"
         sh 'hostnamectl'
      
-        uploadEvidence artifactoryUsername: 'user',
-               artifactoryPassword: 'password',
+        uploadArtifact artifactoryUsername: 'vennb@uk.ibm.com',
+               artifactoryPassword: 'AKCp5fTQuZgypC2TMjELowTamUPT7D2KMN4hEyQFGZ6MScXAAR9tLGoWP4mKLrnPJi2GdbjkA',
                namespace: 'ci',
-               name: 'my-evidence',
-               type: 'com.ibm.unit_test',
-               typeVersion: '1.0',
-               result: 'success',
+               filePath: '/tmp/bv.log',
                backend: 'cos',
                pipelineRunId: '123',
-               pipelineId: 'XYZ',
-    	          toolchainCrn: 'CRN',
-               pipelineRunUrl: 'http://my-pipeline.ibm.com',
-               cosApiKey: 'apikey',
-               cosBucketName: 'my-bucket',
-    	          cosEndpoint: 'cos-endpoint'
+               cosApiKey: '4wvMBGvSLZrreVMmJYHlej0nYY5xPiq8VJ5_iK9fvDgp',
+               cosBucketName: 'cloud-object-storage-qh-cos-standard-itj',
+               cosEndpoint: 's3.eu-gb.cloud-object-storage.appdomain.cloud'
     }
   } catch(Exception e) {
     throw e
