@@ -1,10 +1,11 @@
 node('s390x_cocoa') {
-    stages {
-        stage('Example') {
-            steps {
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-            }
-        }
-    }
-}
+  try {
 
+    stage 'Build'
+    node('s390x_cocoa') {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+    }
+  } catch(Exception e) {
+    throw e
+  }
+}
