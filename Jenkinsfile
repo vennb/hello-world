@@ -9,7 +9,7 @@ node('master') {
         uploadArtifact artifactoryUsername: 'vennb@uk.ibm.com',
                artifactoryPassword: 'AKCp5fTQuZgypC2TMjELowTamUPT7D2KMN4hEyQFGZ6MScXAAR9tLGoWP4mKLrnPJi2GdbjkA',
                namespace: 'ci',
-               filePath: '${WORKSPACE}',
+               filePath: '${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log',
                backend: 'cos',
                pipelineRunId: '123',
                cosApiKey: '4wvMBGvSLZrreVMmJYHlej0nYY5xPiq8VJ5_iK9fvDgp',
