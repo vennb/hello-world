@@ -3,6 +3,14 @@
 node('master') {
   try {
     node('master') {
+     
+        def app
+     
+        stage('Clone repository') {
+        /* Let's make sure we have the repository cloned to our workspace */
+          checkout scm
+        }
+     
         echo "Running ${env.BUILD_ID} from ${env.JENKINS_URL}"
         sh 'hostnamectl'
      
