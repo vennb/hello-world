@@ -2,7 +2,7 @@
 
 node('master') {
   try {
-    node('s390x_cocoa') {
+    node('master') {
         echo "Running ${env.BUILD_ID} from ${env.JENKINS_URL}"
         sh 'hostnamectl'
      
