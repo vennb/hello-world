@@ -16,6 +16,7 @@ node('master') {
         sh 'whoami'
  
          stage('Build image') {
+             cd arm64v8/hello-world
              app = docker.build("s390x/hello-world")
          }
      
