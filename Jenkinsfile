@@ -1,3 +1,5 @@
+ @Library('cocoa-jenkins-shared-library')_
+
 node('s390x_cocoa') {
   try {
 
