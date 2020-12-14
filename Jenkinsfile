@@ -6,6 +6,10 @@ node('master') {
         echo "Running ${env.BUILD_ID} from ${env.JENKINS_URL}"
         sh 'hostnamectl'
      
+         stage('Build image') {
+             app = docker.build("s390x/hello-world")
+         }
+     
         uploadArtifact artifactoryUsername: 'vennb@uk.ibm.com',
                artifactoryPassword: 'AKCp5fTQuZgypC2TMjELowTamUPT7D2KMN4hEyQFGZ6MScXAAR9tLGoWP4mKLrnPJi2GdbjkA',
                namespace: 'ci',
