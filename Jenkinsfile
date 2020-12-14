@@ -16,8 +16,10 @@ node('master') {
         sh 'whoami'
  
          stage('Build image') {
-             cd arm64v8/hello-world
-             app = docker.build("s390x/hello-world")
+             dir("${env.WORKSPACE}/arm64v8/hello-world"){
+                 sh "pwd"
+                 app = docker.build("s390x/hello-world")
+             }
          }
      
         uploadArtifact artifactoryUsername: 'vennb@uk.ibm.com',
