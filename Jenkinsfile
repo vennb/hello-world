@@ -1,6 +1,6 @@
  @Library('cocoa-jenkins-shared-library')_
 
-node('s390x_cocoa') {
+node('master') {
   try {
     node('s390x_cocoa') {
         echo "Running ${env.BUILD_ID} from ${env.JENKINS_URL}"
