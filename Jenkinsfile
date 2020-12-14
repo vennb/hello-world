@@ -1,5 +1,4 @@
-pipeline {
-    node('s390x_cocoa') {
+node('s390x_cocoa') {
     stages {
         stage('Example') {
             steps {
@@ -7,5 +6,5 @@ pipeline {
             }
         }
     }
-    }
 }
+
