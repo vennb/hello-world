@@ -8,9 +8,9 @@ node('s390x_cocoa') {
         }
         
         stage('Build image') {
-             dir("${env.WORKSPACE}/arm64v8/hello-world"){
+             dir("${env.WORKSPACE}/s390x/hello-world"){
                  sh 'whoami'
-                 docker.build("s390x/hello-world")
+                 sh 'docker build -t s390x/hello-world'
              }
          }
      
