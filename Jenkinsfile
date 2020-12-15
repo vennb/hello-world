@@ -2,19 +2,15 @@
 
 node('master') {
   try {
-    node('master') {
      
         stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
           checkout scm
         }
-     
-        echo "Running ${env.BUILD_ID} from ${env.JENKINS_URL}"
         
         stage('Build image') {
              dir("${env.WORKSPACE}/arm64v8/hello-world"){
-                 sh "pwd"
-                 app = docker.build("s390x/hello-world")
+                 docker.build("s390x/hello-world")
              }
          }
      
@@ -32,7 +28,6 @@ node('master') {
                 cosBucketName: 'cloud-object-storage-qh-cos-standard-itj',
                 cosEndpoint: 's3.eu-gb.cloud-object-storage.appdomain.cloud'
         }
-     }
     }
   } catch(Exception e) {
     throw e
