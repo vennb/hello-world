@@ -1,11 +1,7 @@
 @Library('cocoa-jenkins-shared-library')_
 
 node('master') {
-  try {
-        environment {
-            COS_APIKEY = credentials('ibm-cos-apikey')
-        }
-    
+  try {    
         stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
           checkout scm
@@ -18,6 +14,11 @@ node('master') {
          }
      
        stage('Upload to COS'){
+         
+        environment {
+            COS_APIKEY = credentials('ibm-cos-apikey')
+        } 
+         
         withCredentials([usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
            
          uploadEvidence artifactoryUsername: '$ARTIFACTORY_USER',
@@ -32,7 +33,7 @@ node('master') {
                pipelineId: "$JOB_NAME",
     	         toolchainCrn: 's3.eu-gb.cloud-object-storage.appdomain.cloud',
                pipelineRunUrl: "$BUILD_URL",
-               cosApiKey: "${env.COS_APIKEY}",
+               cosApiKey: '${env.COS_APIKEY}',
                cosBucketName: 'cloud-object-storage-qh-cos-standard-itj',
                cosEndpoint: 's3.eu-gb.cloud-object-storage.appdomain.cloud'
          
