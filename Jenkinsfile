@@ -24,11 +24,11 @@ node('master') {
                  sh "pwd"
                  app = docker.build("s390x/hello-world")
              }
-         }
+         }vennb-cos-api
      
      stage('Upload to COS'){
       
-        withCredentials([string(credentialsId: 'ibm-cos-apikey', variable: 'COS_APIKEY'),
+        withCredentials([usernamePassword(credentialsId: 'vennb-cos-api', passwordVariable: 'COS_APIKEY', usernameVariable: 'COS_API_USER'),
                         usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
                
          uploadArtifact artifactoryUsername: '$ARTIFACTORY_USER',
