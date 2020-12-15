@@ -1,7 +1,7 @@
 @Library('cocoa-jenkins-shared-library')_
 
 node('master') {
-  try {    
+  try {
         stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
           checkout scm
@@ -14,12 +14,8 @@ node('master') {
          }
      
        stage('Upload to COS'){
-         
-        environment {
-            COS_APIKEY = credentials('ibm-cos-apikey')
-        } 
-         
-        withCredentials([usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
+        withCredentials([string(credentialsId: 'ibm-cos-apikey', variable: 'COS_APIKEY'),
+                        usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
            
          uploadEvidence artifactoryUsername: '$ARTIFACTORY_USER',
                artifactoryPassword: '$ARTIFACTORY_PASSWORD',
@@ -33,7 +29,7 @@ node('master') {
                pipelineId: "$JOB_NAME",
     	         toolchainCrn: 's3.eu-gb.cloud-object-storage.appdomain.cloud',
                pipelineRunUrl: "$BUILD_URL",
-               cosApiKey: "${env.COS_APIKEY}",
+               cosApiKey: "$COS_APIKEY",
                cosBucketName: 'cloud-object-storage-qh-cos-standard-itj',
                cosEndpoint: 's3.eu-gb.cloud-object-storage.appdomain.cloud'
          
@@ -43,7 +39,7 @@ node('master') {
                 filePath: '$JENKINS_HOME/jobs/${JOB_NAME}/builds/$BUILD_NUMBER/log',
                 backend: 'cos',
                 pipelineRunId: "$BUILD_NUMBER",
-                cosApiKey: "env.$COS_APIKEY",
+                cosApiKey: "$COS_APIKEY",
                 cosBucketName: 'cloud-object-storage-qh-cos-standard-itj',
                 cosEndpoint: 's3.eu-gb.cloud-object-storage.appdomain.cloud'
         }
