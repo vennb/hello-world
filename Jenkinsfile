@@ -1,7 +1,5 @@
  @Library('cocoa-jenkins-shared-library')_
 
-pipeline {
-
 node('master') {
   try {
     node('master') {
@@ -48,5 +46,4 @@ node('master') {
   } catch(Exception e) {
     throw e
   }
-}
 }
