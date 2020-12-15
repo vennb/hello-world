@@ -21,13 +21,13 @@ node('master') {
          }
      
        stage('Upload to COS'){
-        withCredentials([usernamePassword(credentialsId: 'vennb-cos-api', passwordVariable: 'COS_APIKEY', usernameVariable: 'COS_API_USER'),
+        withCredentials([string(credentialsId: 'ibm-cos-apikey', variable: 'COS_APIKEY'),
                         usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
          
-         sh 'echo $COS_APIKEY > myfile.txt'
+         sh 'echo $COS_APIKEY > myfile1.txt'
          script {
           // trim removes leading and trailing whitespace from the string
-          myVar = readFile('myfile.txt').trim()
+          myVar = readFile('myfile1.txt').trim()
           }
           
          echo "BV **********************: ${myVar}" 
