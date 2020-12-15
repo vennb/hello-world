@@ -28,7 +28,7 @@ node('master') {
                backend: 'cos',
                pipelineRunId: "$BUILD_NUMBER",
                pipelineId: "$JOB_NAME",
-    	          toolchainCrn: 's3.eu-gb.cloud-object-storage.appdomain.cloud',
+    	         toolchainCrn: 's3.eu-gb.cloud-object-storage.appdomain.cloud',
                pipelineRunUrl: "$BUILD_URL",
                cosApiKey: "$COS_APIKEY",
                cosBucketName: 'cloud-object-storage-qh-cos-standard-itj',
@@ -39,7 +39,7 @@ node('master') {
                 namespace: 'ci',
                 filePath: '$JENKINS_HOME/jobs/${JOB_NAME}/builds/$BUILD_NUMBER/log',
                 backend: 'cos',
-                pipelineRunId: '$BUILD_NUMBER',
+                pipelineRunId: "$BUILD_NUMBER",
                 cosApiKey: "$COS_APIKEY",
                 cosBucketName: 'cloud-object-storage-qh-cos-standard-itj',
                 cosEndpoint: 's3.eu-gb.cloud-object-storage.appdomain.cloud'
