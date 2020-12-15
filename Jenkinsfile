@@ -10,10 +10,8 @@ node('master') {
         }
      
         echo "Running ${env.BUILD_ID} from ${env.JENKINS_URL}"
-        sh 'hostnamectl'
-        sh 'whoami'
- 
-         stage('Build image') {
+        
+        stage('Build image') {
              dir("${env.WORKSPACE}/arm64v8/hello-world"){
                  sh "pwd"
                  app = docker.build("s390x/hello-world")
