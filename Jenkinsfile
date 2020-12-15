@@ -30,7 +30,7 @@ node('master') {
                pipelineId: "$JOB_NAME",
     	         toolchainCrn: 's3.eu-gb.cloud-object-storage.appdomain.cloud',
                pipelineRunUrl: "$BUILD_URL",
-               cosApiKey: '${env.COS_APIKEY}',
+               cosApiKey: '$env.COS_APIKEY',
                cosBucketName: 'cloud-object-storage-qh-cos-standard-itj',
                cosEndpoint: 's3.eu-gb.cloud-object-storage.appdomain.cloud'
          
