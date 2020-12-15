@@ -26,7 +26,6 @@ node('master') {
       
         withCredentials([string(credentialsId: 'ibm-cos-apikey', variable: 'COS_APIKEY'),
                         usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {   
-         echo "My COS_APIKEY is '${COS_APIKEY}'"
          
          uploadArtifact artifactoryUsername: '${ARTIFACTORY_USER}',
                 artifactoryPassword: '${ARTIFACTORY_PASSWORD}',
