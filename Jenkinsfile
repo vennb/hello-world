@@ -1,6 +1,6 @@
 @Library('cocoa-jenkins-shared-library')_
 
-node('s390x-cocoa') {
+node('s390x_cocoa') {
   try {
         stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
