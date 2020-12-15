@@ -24,7 +24,7 @@ node('master') {
      
      stage('Upload to COS'){
       
-        withCredentials([string(credentialsId: '	ibm-cos-apikey', variable: '$COS_APIKEY'),
+        withCredentials([string(credentialsId: 'ibm-cos-apikey', variable: '$COS_APIKEY'),
                         usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {     
          uploadArtifact artifactoryUsername: '${ARTIFACTORY_USER}',
                 artifactoryPassword: '${ARTIFACTORY_PASSWORD}',
