@@ -4,12 +4,6 @@ node('master') {
   try {
     node('master') {
      
-        environment {
-           SECRET_TEXT = credentials("ibm-cos-apikey")
-        }
-     
-        def app
-     
         stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
           checkout scm
@@ -24,10 +18,9 @@ node('master') {
                  sh "pwd"
                  app = docker.build("s390x/hello-world")
              }
-         }vennb-cos-api
+         }
      
-     stage('Upload to COS'){
-      
+       stage('Upload to COS'){
         withCredentials([usernamePassword(credentialsId: 'vennb-cos-api', passwordVariable: 'COS_APIKEY', usernameVariable: 'COS_API_USER'),
                         usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
                
