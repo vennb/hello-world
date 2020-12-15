@@ -23,6 +23,14 @@ node('master') {
        stage('Upload to COS'){
         withCredentials([usernamePassword(credentialsId: 'vennb-cos-api', passwordVariable: 'COS_APIKEY', usernameVariable: 'COS_API_USER'),
                         usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
+         
+         sh 'echo $COS_APIKEY > myfile.txt'
+         script {
+          // trim removes leading and trailing whitespace from the string
+          myVar = readFile('myfile.txt').trim()
+          }
+          
+         echo "BV **********************: ${myVar}" 
                
          uploadArtifact artifactoryUsername: '$ARTIFACTORY_USER',
                 artifactoryPassword: '$ARTIFACTORY_PASSWORD',
