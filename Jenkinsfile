@@ -2,7 +2,10 @@
 
 node('master') {
   try {
-     
+        environment {
+            COS_APIKEY = credentials('ibm-cos-apikey')
+        }
+    
         stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
           checkout scm
@@ -15,8 +18,7 @@ node('master') {
          }
      
        stage('Upload to COS'){
-        withCredentials([string(credentialsId: 'ibm-cos-apikey', variable: 'COS_APIKEY'),
-                        usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
+        withCredentials([usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) {
            
          uploadEvidence artifactoryUsername: '$ARTIFACTORY_USER',
                artifactoryPassword: '$ARTIFACTORY_PASSWORD',
