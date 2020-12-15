@@ -32,7 +32,7 @@ node('master') {
                 filePath: '${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log',
                 backend: 'cos',
                 pipelineRunId: '123',
-                cosApiKey: '${$COS_APIKEY}',
+                cosApiKey: '${COS_APIKEY}',
                 cosBucketName: 'cloud-object-storage-qh-cos-standard-itj',
                 cosEndpoint: 's3.eu-gb.cloud-object-storage.appdomain.cloud'
         }
