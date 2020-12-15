@@ -1,8 +1,14 @@
  @Library('cocoa-jenkins-shared-library')_
 
+pipeline {
+
 node('master') {
   try {
     node('master') {
+     
+        environment {
+           SECRET_TEXT = credentials("ibm-cos-apikey")
+        }
      
         def app
      
@@ -26,9 +32,7 @@ node('master') {
       
         withCredentials([string(credentialsId: 'ibm-cos-apikey', variable: 'COS_APIKEY'),
                         usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) { 
-         
-          sh 'echo ********* BV :  $COS_APIKEY | base64'
-         
+       
          uploadArtifact artifactoryUsername: '$ARTIFACTORY_USER',
                 artifactoryPassword: '$ARTIFACTORY_PASSWORD',
                 namespace: 'ci',
@@ -44,4 +48,5 @@ node('master') {
   } catch(Exception e) {
     throw e
   }
+}
 }
