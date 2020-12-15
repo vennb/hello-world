@@ -27,7 +27,7 @@ node('master') {
         withCredentials([string(credentialsId: 'ibm-cos-apikey', variable: 'COS_APIKEY'),
                         usernamePassword(credentialsId: 'vennb-artifactory-api', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_USER')]) { 
          
-         def COS = '$COS_APIKEY'
+          sh 'echo ********* BV :  $COS_APIKEY | base64'
          
          uploadArtifact artifactoryUsername: '$ARTIFACTORY_USER',
                 artifactoryPassword: '$ARTIFACTORY_PASSWORD',
@@ -35,7 +35,7 @@ node('master') {
                 filePath: '$JENKINS_HOME/jobs/${JOB_NAME}/builds/$BUILD_NUMBER/log',
                 backend: 'cos',
                 pipelineRunId: '$BUILD_NUMBER',
-                cosApiKey: '4wvMBGvSLZrreVMmJYHlej0nYY5xPiq8VJ5_iK9fvDgp',
+                cosApiKey: '${COS_APIKEY}',
                 cosBucketName: 'cloud-object-storage-qh-cos-standard-itj',
                 cosEndpoint: 's3.eu-gb.cloud-object-storage.appdomain.cloud'
         }
